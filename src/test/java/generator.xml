@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- classPathEntry:数据库的JDBC驱动的jar包地址 -->
+	<classPathEntry location="f:\mysql-connector-java-5.1.18-bin.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<property name="suppressTypeWarnings" value="true" />
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="QueryHelper" />
+		</plugin>
+		
+		<!-- <plugin type="com.shinowit.mybatis.plugin.SelectByPagePlugin" /> -->
+		<!-- <plugin type="com.shinowit.mybatis.plugin.Struts2ActionPlugin" /> -->
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://121.40.172.165:3306/zh_db?useUnicode=true&amp;characterEncoding=UTF-8"
+			userId="root" password="zh2014745">
+		</jdbcConnection>
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		
+		<!-- targetProject:生成数据库对象 -->
+		<javaModelGenerator targetPackage="org.pro.io"
+			targetProject="F:\st\pro\pro-io\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- targetProject:生成数据库对象 -->
+		<javaModelGenerator targetPackage="org.pro.model"
+			targetProject="F:\st\pro\pro-model\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		
+
+		<!-- 基础的curl操作xml -->	
+		<sqlMapGenerator targetPackage="org.pro.mapper.generated"
+			targetProject="F:\st\pro\pro-dao\src\main\java">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- 生成手功配置的xml
+		     1,自己写的SQL可以放到此文件中,再次生成不会影响之的sql
+		 -->
+		<sqlMapGenerator targetPackage="org.pro.mapper.manual"
+			targetBody="false" targetProject="F:\st\pro\pro-dao\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="org.pro.mapper" targetProject="F:\st\pro\pro-dao\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="BaseMapper" />
+		</javaClientGenerator>
+
+		<javaServiceGenerator type="" targetPackage="org.pro.service"
+			targetProject="F:\st\pro\pro-service-api\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="IBaseService" />
+		</javaServiceGenerator>
+
+		<javaServiceImpGenerator type=""
+			targetPackage="org.pro.service.impl" targetProject="F:\st\pro\pro-service\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="BaseServiceImp" />
+		</javaServiceImpGenerator>
+
+		<!-- 生成control 
+		<javaControlGenerator type=""
+			targetPackage="org.pro.web.control" targetProject="F:\st\pro\pro-web\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface"
+				value="com.cnnct.rabbit.framework.base.BaseController" />
+		</javaControlGenerator>
+		-->	
+		<!-- 生成ui 
+		<uiGenerator type="EASYUI" targetPackage="release"
+			targetProject="D:\workspace\treat\treat-manage\src\main\user">
+			<property name="enableSubPackages" value="true" />
+			<property name="enableBrowser" value="true" />
+			<property name="enableAppend" value="true" />
+			<property name="enableModify" value="true" />
+			<property name="enableTree" value="true" />
+			<property name="enableQueryForm" value="true" />
+			<property name="javaScriptPackage"
+				value="D:\workspace\treat\treat-manage\src\main\webapp\resources\js" />
+		</uiGenerator>
+		-->
+
+		<table tableName="users" modelType="flat" domainObjectName="Users">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+
+	</context>
+
+</generatorConfiguration>  			

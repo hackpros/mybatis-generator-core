@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- classPathEntry:数据库的JDBC驱动的jar包地址 
+	<classPathEntry location="f:\lib\mysql-connector-java-5.1.18-bin.jar" /> -->
+	
+	<classPathEntry location="D:\workspace\mybatis-tools\mybatis-def\lib\mysql-connector-java-5.1.18-bin.jar" />
+	
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<property name="suppressTypeWarnings" value="true" />
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="QueryHelper" />
+		</plugin>
+
+		<!-- <plugin type="com.shinowit.mybatis.plugin.SelectByPagePlugin" /> -->
+		<!-- <plugin type="com.shinowit.mybatis.plugin.Struts2ActionPlugin" /> -->
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/b2b-activity?useUnicode=true&amp;characterEncoding=UTF-8"
+			userId="root" password="root">
+		</jdbcConnection>
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+
+		<!-- targetProject:生成数据库对象 -->
+		<javaModelGenerator targetPackage="com.jumore.b2b.activity.service.business.io"
+			targetProject="F:\mq\b2b\b2b-daren\daren-io\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+
+		<!-- targetProject:生成数据库对象 -->
+		<javaModelGenerator targetPackage="com.jumore.b2b.activity.model"
+			targetProject="D:\workspace\b2b\b2p-activity\activity-dao\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+
+		<!-- 基础的curl操作xml -->
+		<sqlMapGenerator targetPackage="com.jumore.b2b.activity.mapper.generated"
+			targetProject="D:\workspace\b2b\b2p-activity\activity-dao\src\main\java">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- 生成手功配置的xml 1,自己写的SQL可以放到此文件中,修改表结构后，不再生成此基项 -->
+		<sqlMapGenerator targetPackage="com.jumore.b2b.activity.mapper.manual" targetBody="false"
+			targetProject="D:\workspace\b2b\b2p-activity\activity-dao\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+	  
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.jumore.b2b.activity.mapper"
+			targetProject="D:\workspace\b2b\b2p-activity\activity-dao\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="BaseMapper" />
+		</javaClientGenerator>
+
+		<javaServiceGenerator type=""
+			targetPackage="com.jumore.b2b.activity.service"
+			targetProject="D:\workspace\b2b\b2p-activity\activity-dao\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="IBaseService" />
+		</javaServiceGenerator>
+
+		<javaServiceImpGenerator type=""
+			targetPackage="com.jumore.b2b.activity.service.impl"
+			targetProject="D:\workspace\b2b\b2p-activity\activity-dao\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="BaseServiceImp" />
+		</javaServiceImpGenerator>
+
+
+
+		<!--生成double 服务 !	
+		<javaServiceGenerator type=""
+			targetPackage="com.jumore.b2b.activity.business.api"
+			targetProject="D:\workspace\b2b\b2p-activity\activity-service-business\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="IBaseService" />
+		</javaServiceGenerator>
+
+		<javaServiceImpGenerator type=""
+			targetPackage="com.jumore.b2b.activity.business"
+			targetProject="DD:\workspace\b2b\b2p-activity\activity-service-business-api\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="BaseServiceImp" />
+		</javaServiceImpGenerator>
+		-->
+ 	
+
+		<!--生成control ! -->
+		<javaControlGenerator type=""
+			targetPackage="com.jumore.b2b.activity.admin"
+			targetProject="D:\workspace\b2b\b2p-activity\activity-admin\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface"
+				value="com.cnnct.rabbit.framework.base.BaseController" />
+		</javaControlGenerator>
+
+		<!--生成js ! -->
+		<uiGenerator type="EASYUI" targetPackage="release"
+			targetProject="D:\workspace\b2b\b2p-activity\activity-admin\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="enableBrowser" value="true" />
+			<property name="enableAppend" value="true" />
+			<property name="enableModify" value="true" />
+			<property name="enableTree" value="true" />
+			<property name="enableQueryForm" value="true" />
+			<property name="javaScriptPackage"
+				value="D:\workspace\b2b\b2p-activity\activity-admin\src\main\webapp\resources\js" />
+		</uiGenerator>
+
+
+		<!-- select concat_ws(' ','<table tableName="',TABLE_NAME,' domainObjectName="Users"> 
+			<property name="useActualColumnNames" value="true" /> <generatedKey column="id" 
+			sqlStatement="Mysql" /> </table>') from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA='b2b-activity' -->
+
+		<table schema="b2b-activity" tableName="activity" domainObjectName="Activity">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+		<table schema="b2b-activity" tableName="activity_attr" domainObjectName="ActivityAttr">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+		<table schema="b2b-activity" tableName="gift"  domainObjectName="Gift">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+		<table schema="b2b-activity" tableName="gift_attr" domainObjectName="GiftAttr">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+		<table schema="b2b-activity" tableName="gift_category" domainObjectName="GiftCategory">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+		<table schema="b2b-activity" tableName="user_ewallet" domainObjectName="UserEwallet">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+		<table schema="b2b-activity" tableName=" user_ewallet_log" domainObjectName="UserEwalletLog">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+		<table schema="b2b-activity"  tableName="user_gift" domainObjectName="UserGift">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+		<table schema="b2b-activity" tableName="user_gift_log" domainObjectName="UserGiftLog">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="Mysql" />
+		</table>
+
+
+
+
+	</context>
+
+</generatorConfiguration>  			

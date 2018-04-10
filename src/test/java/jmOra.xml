@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- classPathEntry:数据库的JDBC驱动的jar包地址 -->
+	<classPathEntry location="f:\lib\ojdbc14.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<property name="suppressTypeWarnings" value="true" />
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="QueryHelper" />
+		</plugin>
+
+		<!-- <plugin type="com.shinowit.mybatis.plugin.SelectByPagePlugin" /> -->
+		<!-- <plugin type="com.shinowit.mybatis.plugin.Struts2ActionPlugin" /> -->
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+
+		<jdbcConnection connectionURL="jdbc:oracle:thin:@192.168.1.13:1521:xyxdb"
+			driverClass="oracle.jdbc.driver.OracleDriver" userId="sl" password="sl">
+		</jdbcConnection>
+
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+
+		<!-- targetProject:生成数据库对象 -->
+		<javaModelGenerator targetPackage="com.jumore.b2b.activity.model"
+			targetProject="D:\workspace\activity\b2b\b2b-activity\activity-support\supper-service\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+
+
+		<!-- 基础的curl操作xml -->
+		<sqlMapGenerator targetPackage="com.jumore.b2b.activity.mapper.generated"
+			targetProject="D:\workspace\activity\b2b\b2b-activity\activity-support\supper-service\src\main\java">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- 生成手功配置的xml 1,自己写的SQL可以放到此文件中,再次生成不会影响之的sql -->
+		<sqlMapGenerator targetPackage="com.jumore.b2b.activity.mapper.manual"
+			targetBody="true"
+			targetProject="D:\workspace\activity\b2b\b2b-activity\activity-support\supper-service\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.jumore.b2b.activity.mapper"
+			targetProject="D:\workspace\activity\b2b\b2b-activity\activity-support\supper-service\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="BaseMapper" />
+		</javaClientGenerator>
+
+		<javaServiceGenerator type=""
+			targetPackage="com.jumore.b2b.activity.service"
+			targetProject="D:\workspace\activity\b2b\b2b-activity\activity-support\supper-service\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="IBaseService" />
+		</javaServiceGenerator>
+
+		<javaServiceImpGenerator type=""
+			targetPackage="com.jumore.b2b.activity.service.impl"
+			targetProject="D:\workspace\activity\b2b\b2b-activity\activity-support\supper-service\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootInterface" value="BaseServiceImp" />
+		</javaServiceImpGenerator>
+
+
+
+		<!--生成double 服务 ! <javaServiceGenerator type="" targetPackage="com.jumore.b2b.activity.business.api" 
+			targetProject="D:\workspace\b2b\b2p-activity\activity-service-business\src\main\java"> 
+			<property name="enableSubPackages" value="true" /> <property name="rootInterface" 
+			value="IBaseService" /> </javaServiceGenerator> <javaServiceImpGenerator 
+			type="" targetPackage="com.jumore.b2b.activity.business" targetProject="DD:\workspace\b2b\b2p-activity\activity-service-business-api\src\main\java"> 
+			<property name="enableSubPackages" value="true" /> <property name="rootInterface" 
+			value="BaseServiceImp" /> </javaServiceImpGenerator> -->
+
+
+
+
+		<table tableName="bill_order" domainObjectName="BillOrder">
+		</table>
+
+
+
+
+
+	</context>
+
+</generatorConfiguration>  			
