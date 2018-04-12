@@ -169,7 +169,7 @@ public class JDLUIGenerator extends AbstractUIGenerator {
                 case Types.DOUBLE:
                 case Types.NUMERIC:
                 case Types.DECIMAL:
-                    answer.setContent(MessageFormat.format(DECIMAL_FIELD_FMT, introspectedColumn.getJavaProperty(), required, comments));
+                    answer.setContent(MessageFormat.format(DECIMAL_FIELD_FMT, introspectedColumn.getJavaProperty(), required, maxLength,comments));
                     break;
                 case Types.CHAR:
                     // char json ,enum
